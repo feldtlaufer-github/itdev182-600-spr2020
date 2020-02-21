@@ -1,20 +1,44 @@
 import React from 'react';
-import { StyleSheet, Text, ImageBackground, View, KeyboardAvoidingView, Platform, } from 'react-native';
+import { StyleSheet, Text, ImageBackground, View, KeyboardAvoidingView, Platform, ActivityIndicator, StatusBar} from 'react-native';
 import SearchInput from "./components/SearchInput";
 import getImageForWeather from "./utils/getImageForWeather";
+import { fetchLocationId, fetchWeather } from "./utils/api";
 
 export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      location: "San Francisco",
+      location: "",
+      loading: false,
+      error: false,
+      temperature: 0,
+      weather: "",
     };
   }
-  handleUpdateLocation = city => {
-    this.setState({
-      location: city,
+  handleUpdateLocation = async city => {
+    if(!city) return;
+    this.setState({loading: true }, async() => {
+      try{
+        const locationId = await fetchLocationId(city);
+        const { location, weather, temperature }= await fetchWeather(locationId);
+        this.setState({
+          loading: false,
+          error: false,
+          location,
+          weather,
+          temperature,
+        });
+      } catch(e){
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
     });
   };
+  componentDidMount(){
+    this.handleUpdateLocation("San Francisco");
+  }
 
   render(){
     const{ location } = this.state;
