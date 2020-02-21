@@ -54,3 +54,16 @@ const styles = StyleSheet.create({
         color: "white",
     },
 });
+/**
+ * 
+ * I couldn't figure out where this goes
+ * 
+ * SearchInput.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+};
+SearchInput.defaultProps = {
+    placeholder: "",
+};
+ * 
+ */
