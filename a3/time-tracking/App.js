@@ -34,7 +34,7 @@ state = {
         </View>
         <ScrollView style={styles.timerList}>
           <ToggleableTimerForm />
-          {timers.map(({title, project, id, elapse, isRunning}) => (
+          {timers.map(({title, project, id, elapsed, isRunning}) => (
             <EditableTimer
               key={id}
               id={id}
