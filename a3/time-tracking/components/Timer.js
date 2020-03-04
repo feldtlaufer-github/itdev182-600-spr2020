@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stylesheet, View, Text } from 'react-native';
-import { millisecondsToHuman } from '..//utils/TimerUtils';
+import { millisecondsToHuman } from './utils/TimerUtils';
 import TimerButton from './TimerButton';
 
 export default function Timer({ title, project, elapsed }){
