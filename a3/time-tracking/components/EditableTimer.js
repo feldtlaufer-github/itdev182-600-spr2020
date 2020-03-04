@@ -1,6 +1,7 @@
 import React from 'react';
 import TimerForm from './TimerForm';
 import Timer from './Timer';
+import PropTypes from 'prop-types';
 
 export default class EditableTimer extends React.Component{
     static propTypes = {

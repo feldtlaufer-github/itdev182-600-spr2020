@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import TimerButton from './TimerButton';
 import TimerForm from './TimerForm';
+import PropTypes from 'prop-types'
 
 export default class ToggleableTimerForm extends React.Component{
     static propTypes = {

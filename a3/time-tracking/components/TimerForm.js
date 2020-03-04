@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import TimerButton from './TimerButton';
+import PropTypes from 'prop-types';
 
 export default class TimerForm extends React.Component{
     static propTypes = {

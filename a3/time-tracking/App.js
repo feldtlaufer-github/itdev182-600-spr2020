@@ -4,6 +4,7 @@ import EditableTimer from './components/EditableTimer';
 import ToggleableTimerForm from './components/ToggleableTimerForm';
 import uuidv4 from 'uuid/v4';
 import { newTimer } from './utils/TimerUtils';
+import PropTypes from 'prop-types';
 
 export default class App extends React.Component{
   state = {
