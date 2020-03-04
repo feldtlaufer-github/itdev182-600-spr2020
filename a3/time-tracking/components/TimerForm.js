@@ -6,11 +6,11 @@ export default function TimerForm({ id, title, project }){
     const submitText = id ? 'Update' : 'Create';
 
     return(
-        <View style={Stylesheet.formContainer}>
-            <View style={Stylesheet.attributeContainer}>
-                <Text style={Stylesheet.textInputTitle}>Title</Text>
-                <View style={Stylesheet.textInputContainer}>
-                    <TextInput style={Stylesheet.textInput}
+        <View style={styles.formContainer}>
+            <View style={styles.attributeContainer}>
+                <Text style={styles.textInputTitle}>Title</Text>
+                <View style={styles.textInputContainer}>
+                    <TextInput style={styles.textInput}
                         underlineColorAndroid="transparent"
                         defaultValue={title}
                         />
