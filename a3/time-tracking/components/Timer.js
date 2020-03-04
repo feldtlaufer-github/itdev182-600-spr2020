@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stylesheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
 
@@ -19,7 +19,7 @@ export default function Timer({ title, project, elapsed }){
     );
 }
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
     timerContainer: {
         backgroundColor: 'white',
         borderColor: '#d6d7da',

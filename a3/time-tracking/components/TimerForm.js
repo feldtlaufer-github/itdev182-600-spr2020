@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stylesheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput} from 'react-native';
 import TimerButton from './TimerButton';
 
 export default function TimerForm({ id, title, project }){
@@ -33,7 +33,7 @@ export default function TimerForm({ id, title, project }){
     );
 }
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
     formContainer: {
         backgroundColor: 'white',
         borderColor: '#D6D7D1',

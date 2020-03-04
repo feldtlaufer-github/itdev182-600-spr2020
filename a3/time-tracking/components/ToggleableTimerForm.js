@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stylesheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TimerButton from './TimerButton';
 import TimerForm from './TimerForm';
 
@@ -15,7 +15,7 @@ export default function ToggleableTimerForm({ isOpen }) {
     );
 }
 
-const styles = StylesSheet.create({
+const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
     },
