@@ -54,5 +54,6 @@ const styles = StyleSheet.create({
     image: {
         aspectRatio: 1,
         backgroundColor: 'rgba(0,0,0,0.02)',
+        height: 600,
     },
 });
