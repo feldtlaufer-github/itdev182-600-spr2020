@@ -11,12 +11,19 @@ export default function AuthorRow({
     return (
         <View style={styles.container}>
             <Avatar
-                siz={35}
+                size={35}
                 initials={getInitials(fullname)}
                 backgroundColor={getAvatarColor(fullname)} />
                 <Text style={styles.text} numberOfLines={1}>
                     {fullname}
                 </Text>
+                {!!linkText && (
+                    <TouchableOpacity onPress={onPressLinkText}>
+                        <Text numberOfLines={1}>
+                            {linkText}
+                        </Text>
+                    </TouchableOpacity>
+                )}
         </View>
     );
 }
