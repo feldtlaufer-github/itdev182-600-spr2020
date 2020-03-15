@@ -48,9 +48,10 @@ export default class Feed extends React.Component {
         }
         return (
             <SafeAreaView style={style}>
-                <CardList items={items}
-                commentsForItem={commentsForItem}
-                onPressComments={onPressComments} />
+                <CardList
+                    items={items}
+                    commentsForItem={commentsForItem}
+                    onPressComments={onPressComments} />
             </SafeAreaView>
         );
     }

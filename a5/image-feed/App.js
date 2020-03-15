@@ -47,7 +47,7 @@ export default class App extends React.Component {
       ...commentsForItem,
       [selectedItemId]: [...comments, text],
     };
-    this.setState({ commentsForItem: updated});
+    this.setState({ commentsForItem: updated });
     try{
       await AsyncStorage.setItem(ASYNC_STORAGE_COMMENTS_KEY, JSON.stringify(updated),);
     } catch(e){

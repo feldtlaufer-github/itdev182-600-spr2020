@@ -24,12 +24,12 @@ export default class CardList extends React.Component {
         const comments = commentsForItem[id];
         return (
             <Card
-            fullname={author}
-            image={{
-                uri: getImageFromId(id),
-            }}
-            linkText={`${comments ? comments.length: 0} Comments`}
-            onPressLinkText={() => onPressComments(id)}
+                fullname={author}
+                image={{
+                    uri: getImageFromId(id),
+                }}
+                linkText={`${comments ? comments.length: 0} Comments`}
+                onPressLinkText={() => onPressComments(id)}
             />
         );
     };

@@ -13,7 +13,7 @@ export default function Comments({
             <NavigationBar
                 title="Comments"
                 leftText="Close"
-            onPressLeftText={onClose} />
+                onPressLeftText={onClose} />
             <CommentInput
                 placeholder="Leave a comment"
                 onSubmit={onSubmitComment}
