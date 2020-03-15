@@ -26,13 +26,23 @@ export default class App extends React.Component {
     });
   };
 
+  onSubmitComment = (text) => {
+    const {selectedItemId, commentsForItem} = this.state;
+    const comments = commentsForItem[selectedItemId] || [];
+    const updated = {
+      ...commentsForItem,
+      [selectedItemId]; [...comments, text],
+    };
+    this.setState({ commentsForItem: updated});
+  };
+
   render(){
     const { commentsForItem, showModal, selectedId } = this.state;
     return (
       <View style={styles.container}>
         <Feed style={styles.feed}
-        commentsForItem={commentsForItem}
-        onPressComments={this.openCommentScreen} />
+          commentsForItem={commentsForItem}
+          onPressComments={this.openCommentScreen} />
         <Modal
           visible={showModal}
           animationType="slide"
@@ -40,7 +50,8 @@ export default class App extends React.Component {
             <Comments
               style={styles.container}
               comments={commentsForItem[selectedItemId] || []}
-              onClose={this.closeCommentScreen} />
+              onClose={this.closeCommentScreen}
+              onSubmitComment={this.onSubmitComment} />
           </Modal>
       </View>
     );
