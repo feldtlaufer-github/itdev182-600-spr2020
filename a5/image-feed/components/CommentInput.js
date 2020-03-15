@@ -1,4 +1,4 @@
-import { Stylesheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -46,8 +46,8 @@ export default class CommentInput extends React.Component {
     }
 }
 
-const styles = Stylesheet.create({
-    container:{
+const styles = StyleSheet.create({
+    container: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: 'rgba(0,0,0,0.1)',
         paddingHorizontal: 20,

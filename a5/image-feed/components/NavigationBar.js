@@ -1,4 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export default function NavigationBar({
     title, leftText, onPressLeftText,

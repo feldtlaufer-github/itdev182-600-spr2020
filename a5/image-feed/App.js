@@ -59,7 +59,7 @@ export default class App extends React.Component {
   };
 
   render(){
-    const { commentsForItem, showModal, selectedId } = this.state;
+    const { commentsForItem, showModal, selectedItemId } = this.state;
     return (
       <View style={styles.container}>
         <Feed style={styles.feed}
