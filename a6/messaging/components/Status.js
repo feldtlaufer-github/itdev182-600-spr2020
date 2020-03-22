@@ -5,7 +5,7 @@ import React from 'react';
 
 export default class Status extends React.Component{
     state = {
-        isConnected: false,
+        isConnected: true,
     };
     async componentWillMount() {
         this.subscription = NetInfo.addEventListener(
