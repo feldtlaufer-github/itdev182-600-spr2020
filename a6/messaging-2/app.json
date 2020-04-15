@@ -1,5 +1,9 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#FFFFFF"
+    },
     "name": "messaging-2",
     "slug": "messaging-2",
     "privacy": "public",

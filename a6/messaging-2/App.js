@@ -1,4 +1,5 @@
 import React from 'react';
+import Status from './components/Status';
 import { StyleSheet, View } from 'react-native';
 
 export default class App extends React.Component {
@@ -20,6 +21,7 @@ export default class App extends React.Component {
   render(){
     return (
       <View style={styles.container}>
+        <Status />
         {this.renderMessageList()}
         {this.renderToolbar()}
         {this.renderInputMethodEditor()}
