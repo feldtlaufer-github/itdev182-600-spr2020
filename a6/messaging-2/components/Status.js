@@ -9,7 +9,19 @@ import React from 'react';
 
 export default class Status extends React.Component{
     state = {
-        isConnected: false,
+        isConnected: true,
+    };
+
+    async componentDidMount() {
+        this.subscription = NetInfo.addEventListener(this.handleChange);
+        const { isConnected } = await NetInfo.fetch();
+        this.setState({isConnected});
+    };
+    componentWillUnmount(){
+        this.subscription();
+    };
+    handleChange = ({isConnected}) => {
+        this.setState({isConnected});
     };
 
     render(){
