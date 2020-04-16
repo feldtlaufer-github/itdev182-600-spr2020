@@ -7,6 +7,7 @@ import { StyleSheet,
           TouchableHighlight,
           BackHandler, } from 'react-native';
 import Toolbar from './components/Toolbar';
+import ImageGrid from './components/ImageGrid';
 import {
   createImageMessage, createLocationMessage, createTextMessage,
 } from './utils/MessageUtils';
@@ -151,11 +152,13 @@ export default class App extends React.Component {
       </View>
     );
   }
-  renderInputMethodEditor(){
-    return (
-      <View style={styles.inputMethodEditor}></View>
-    );
-  }
+  
+  renderInputMethodEditor = () => (
+    <View style={styles.inputMethodEditor}>
+      <ImageGrid />
+    </View>
+  );
+
   renderToolbar(){
     const { isInputFocused } = this.state;
     return (
