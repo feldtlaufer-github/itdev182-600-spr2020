@@ -6,6 +6,7 @@ import { StyleSheet,
           Image,
           TouchableHighlight,
           BackHandler, } from 'react-native';
+import Toolbar from './components/Toolbar';
 import {
   createImageMessage, createLocationMessage, createTextMessage,
 } from './utils/MessageUtils';
@@ -38,6 +39,35 @@ export default class App extends React.Component {
       }),
     ],
     fullscreenImageId: null,
+    isInputFocused: false,
+  };
+
+  handlePressToolbarCamera = () => {
+
+  }
+  handlePressToolbarLocation = () => {
+    const {messages} = this.state;
+    navigator.geolocation.getCurrentPosition((position) => {
+      const {coords: {latitude, longitude}} = position;
+      this.setState({
+        messages: [
+          createLocationMessage({
+            latitude,
+            longitude,
+          }),
+          ...messages,
+        ],
+      });
+    });
+  };
+  handleChangeFocus = (isFocused) => {
+    this.setState({isInputFocused: isFocused});
+  };
+  handleSubmit = (text) => {
+    const {messages} = this.state;
+    this.setState({
+      messages: [createTextMessage(text), ...messages],
+    });
   };
 
   componentDidMount(){
@@ -101,7 +131,10 @@ export default class App extends React.Component {
               );
             break;
       case 'image':
-        this.setState({fullscreenImageId: id});
+        this.setState({
+          fullscreenImageId: id,
+          isInputFocused: false,
+        });
         break;
       default:
         break;
@@ -124,8 +157,16 @@ export default class App extends React.Component {
     );
   }
   renderToolbar(){
+    const { isInputFocused } = this.state;
     return (
-      <View style={styles.toolbar}></View>
+      <View style={styles.toolbar}>
+        <Toolbar
+          isFocused={isInputFocused}
+          onSubmit={this.handleSubmit}
+          onChangeFocus={this.handleChangeFocus}
+          onPressCamera={this.handlePressToolbarCamera}
+          onPressLocation={this.handlePressToolbarLocation} />
+      </View>
     );
   }
   render(){
