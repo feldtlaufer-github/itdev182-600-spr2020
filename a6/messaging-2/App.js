@@ -43,6 +43,13 @@ export default class App extends React.Component {
     isInputFocused: false,
   };
 
+  handlePressImage = (uri) => {
+    const {messages} = this.state;
+    this.setState({
+      messages: [createImageMessage(uri), ...messages],
+    });
+  };
+
   handlePressToolbarCamera = () => {
 
   }
@@ -155,7 +162,7 @@ export default class App extends React.Component {
   
   renderInputMethodEditor = () => (
     <View style={styles.inputMethodEditor}>
-      <ImageGrid />
+      <ImageGrid onPressImage={this.handlePressImage} />
     </View>
   );
 
