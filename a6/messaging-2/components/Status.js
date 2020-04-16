@@ -12,7 +12,20 @@ export default class Status extends React.Component{
         isConnected: true,
     };
 
-    async componentDidMount() {
+    /**
+     *Couldn't debug
+     Unhandled Rejection (Invariant Violation):
+     Trying to subscribe to unknown event: 
+     function(_ref){
+         var isConnected = _ref.isConnected;
+         _this.setState({
+             isConnected: isConnected"
+         });
+        }
+
+        Something about componentDidMount
+     * 
+     async componentDidMount() {
         this.subscription = NetInfo.addEventListener(this.handleChange);
         const { isConnected } = await NetInfo.fetch();
         this.setState({isConnected});
@@ -23,6 +36,9 @@ export default class Status extends React.Component{
     handleChange = ({isConnected}) => {
         this.setState({isConnected});
     };
+     */
+
+    
 
     render(){
         const {isConnected} = this.state;
