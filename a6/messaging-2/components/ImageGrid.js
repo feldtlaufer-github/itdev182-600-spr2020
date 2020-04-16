@@ -8,6 +8,8 @@ import Grid from './Grid';
 const keyExtractor = ({uri}) => uri;
 
 export default class ImageGrid extends React.Component{
+    loading = false;
+    cursor = null;
     static propTypes = {
         onPressImage: PropTypes.func,
     };
@@ -16,15 +18,47 @@ export default class ImageGrid extends React.Component{
     };
 
     state = {
-        images: [
-            {uri: 'https://picsum.photos/600/600?image=10' },
-            {uri: 'https://picsum.photos/600/600?image=20' },
-            {uri: 'https://picsum.photos/600/600?image=30' },
-            {uri: 'https://picsum.photos/600/600?image=40' },
-        ],
+        images: [],
+    };
+
+    componentDidMount(){
+        this.getImages();
+    }
+    getImages = async (after) => {
+        if(this.loading) return;
+        this.loading = true;
+
+        const {status} = await Permissions.askAsync(
+            Permissions.CAMERA_ROLL,
+        );
+        if(status !== 'granted'){
+            console.log('Camera roll permission denied');
+            return;
+        }
+        const results = await CameraRoll.getPhotos({
+            first: 20,
+            after,
+            assetType: 'Photos',
+        });
+        const {edges, page_info: {
+            has_next_page, end_cursor
+        },} = results;
+        const loadedImages = edges.map(item => item.node.image);
+        this.setState({ images: this.state.images.concat(
+            loadedImages
+        ), }, () => {
+            this.loading = false;
+            this.cursor = has_next_page ? end_cursor : null;
+        }, );
+    };
+
+    getNextImages = () => {
+        if(!this.cursor) return;
+        this.getImages(this.cursor);
     };
 
     renderItem = ({ item: {uri}, size, marginTop, marginLeft }) => {
+        const {onPressImage} = this.props;
         const style = {
             width: size,
             height: size,
@@ -32,7 +66,13 @@ export default class ImageGrid extends React.Component{
             marginTop,
         };
         return (
-            <Image source={{uri}} style={style} />
+            <TouchableOpacity
+                key={uri}
+                activeOpacity={0.75}
+                onPress={() => onPressImage(uri)}
+                style={style}>
+                <Image source={{uri}} style={styles.image} />
+            </TouchableOpacity>
         );
     };
 
@@ -42,7 +82,8 @@ export default class ImageGrid extends React.Component{
             <Grid
                 data={images}
                 renderItem={this.renderItem}
-                keyExtractor={keyExtractor} />
+                keyExtractor={keyExtractor}
+                onEndReached={this.getNextImages} />
         );
     }
 }
