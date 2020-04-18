@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MessageShape } from '../utils/MessageUtils';
 import { FlatList, Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
-import MapView from 'react-native-maps';
+import {MapView} from 'expo';
 
 const keyExtractor = item => item.id.toString();
 
@@ -58,6 +58,10 @@ export default class MessageList extends React.Component{
                             <MapView.Marker coordinate={coordinate} />
                         </MapView>
                 );
+                /**
+                 * Error in MapView
+                 * Cannot read property Marker of null.
+                 */
             default:
                 return null;
         }

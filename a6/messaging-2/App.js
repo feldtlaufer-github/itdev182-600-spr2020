@@ -11,21 +11,7 @@ import ImageGrid from './components/ImageGrid';
 import {
   createImageMessage, createLocationMessage, createTextMessage,
 } from './utils/MessageUtils';
-//import MessageList from './components/MessageList';
-/**
- * TypeError: Object(...) is not a function
- * In MapView.js 1009
- * const nativeComponent = Component => requireNativeComponent(
- *    Component, MapView, {
- *        nativeOnly: {
- *            onChang:true...}
- *    }
- * )
- * 
- * Attempted Import Error: 'requireNativeComponent'
- * is not exported from 'react-native-web/dist/index'
- */
-
+import MessageList from './components/MessageList';
 
 export default class App extends React.Component {
 
@@ -153,9 +139,9 @@ export default class App extends React.Component {
     const { messages } = this.state;
     return (
       <View style={styles.content}>
-        {/* <MessageList
+        <MessageList
           messages={messages}
-          onPressMessage={this.handlePressMessage} /> */}
+          onPressMessage={this.handlePressMessage} />
       </View>
     );
   }

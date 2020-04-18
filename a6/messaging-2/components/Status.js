@@ -37,6 +37,7 @@ export default class Status extends React.Component{
         this.setState({isConnected});
     };
      */
+    
 
     
 
