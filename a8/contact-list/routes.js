@@ -8,8 +8,10 @@ import Contacts from './screens/Contacts';
 import Favorites from './screens/Favorites';
 import Profile from './screens/Profile';
 import User from './screens/User';
+import Options from './screens/Options';
 
 import colors from './utils/colors';
+import { Modal } from 'react-native';
 
 const getTabBarIcon = icon => ({tintColor}) => (
     <MaterialIcons name={icon} size={26} style={{color: tintColor}} />
@@ -35,7 +37,9 @@ const FavoritesScreens = createStackNavigator({
 },);
 const UserScreens = createStackNavigator({
     User,
+    Options
 },{
+    mode: 'modal',
     initialRouteName: 'User',
     navigationOptions: {
         tabBarIcon: getTabBarIcon('person'),
