@@ -2,15 +2,15 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Contacts from './screens/Contacts';
 import Profile from './screens/Profile';
-import Favorites from './screens/Favorites';
+import User from './screens/User';
 
 const StackNavigator = createStackNavigator({
     Contacts,
     Profile,
-    Favorites,
+    User
     },
     {
-      initialRouteName: 'Favorites',
+      initialRouteName: 'User',
 });
 
 export default createAppContainer(StackNavigator);
