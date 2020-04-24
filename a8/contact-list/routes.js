@@ -1,16 +1,13 @@
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Contacts from './screens/Contacts';
-import Profile from './screens/Profile';
+import Favorites from './screens/Favorites';
 import User from './screens/User';
 
-const StackNavigator = createStackNavigator({
+const TabNavigator = createBottomTabNavigator({
     Contacts,
-    Profile,
-    User
-    },
-    {
-      initialRouteName: 'User',
+    Favorites,
+    User,
 });
 
-export default createAppContainer(StackNavigator);
+export default createAppContainer(TabNavigator);
