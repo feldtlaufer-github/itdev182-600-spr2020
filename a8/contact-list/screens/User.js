@@ -6,7 +6,7 @@ import {fetchUserContact} from '../utils/api';
 import {MaterialIcons} from '@expo/vector-icons';
 
 export default class User extends React.Component{
-    static navigationOptions = ({navigation: {navigate} }) => ({
+    static navigationOptions = ({navigation: {openDrawer, navigate} }) => ({
         title: 'Me',
         headerTintColor: 'white',
         headerStyle: {

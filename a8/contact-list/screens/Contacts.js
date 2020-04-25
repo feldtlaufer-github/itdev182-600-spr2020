@@ -3,11 +3,14 @@ import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native'
 
 import ContactListItem from '../components/ContactListItem';
 import { fetchContacts } from '../utils/api';
+import {MaterialIcons} from '@expo/vector-icons';
+import colors from '../utils/colors';
+
 
 const keyExtractor = ({phone}) => phone;
 
 export default class Contacts extends React.Component{
-    static navigationOptions = ({
+    static navigationOptions = ({navigation: {openDrawer} }) => ({
         title: 'Contacts',
         headerLeft: (
             <MaterialIcons

@@ -2,11 +2,14 @@ import React from 'react';
 import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
 import {fetchContacts} from '../utils/api';
 import ContactThumbnail from '../components/ContactThumbnail';
+import {MaterialIcons} from '@expo/vector-icons';
+import colors from '../utils/colors';
+
 
 const keyExtractor = ({phone}) => phone;
 
 export default class Favorites extends React.Component{
-    static navigationOptions = ({
+    static navigationOptions = ({navigation: {openDrawer, navigate} }) => ({
         title: 'Favorites',
         headerLeft: (
             <MaterialIcons
