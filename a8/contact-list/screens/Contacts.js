@@ -3,8 +3,7 @@ import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native'
 
 import ContactListItem from '../components/ContactListItem';
 import { fetchContacts } from '../utils/api';
-import {MaterialIcons} from '@expo/vector-icons';
-import colors from '../utils/colors';
+import store from '../store';
 
 
 const keyExtractor = ({phone}) => phone;
@@ -12,35 +11,27 @@ const keyExtractor = ({phone}) => phone;
 export default class Contacts extends React.Component{
     static navigationOptions = ({navigation: {openDrawer} }) => ({
         title: 'Contacts',
-        headerLeft: (
-            <MaterialIcons
-                name="menu"
-                size={24}
-                style={{color: colors.black, marginLeft: 10}}
-                onPress={() => openDrawer()} />
-        ),
     });
 
     state = {
-        contacts: [],
-        loading: true,
-        error: false,
+        contacts: store.getState().contacts,
+        loading: store.getState().isFetchingContacts,
+        error: store.getState().error,
     };
     async componentDidMount(){
-        try{
-            const contacts = await fetchContacts();
-            this.setState({
-                contacts,
-                loading: false,
-                error: false,
-            });
-        }catch(e){
-            this.setState({
-                loading: false,
-                error: true,
-            });
-        }
+        this.unsubscribe = store.onChange(() => this.setState({
+            contacts: store.getState().contacts,
+            loading: store.getState().isFetchingContacts,
+            error: store.getState().error,
+        }),);
+
+        const contacts = await fetchContacts();
+        store.setState({contacts, isFetchingContacts: false});
     }
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
+
     renderContact = ({item}) => {
         const {id, name, avatar, phone} = item;
         const {navigation: {navigate}} = this.props;
@@ -54,7 +45,7 @@ export default class Contacts extends React.Component{
     };
     
     render(){
-        const {loading, contacts, error} = this.state;
+        const {contacts, loading, error} = this.state;
         const contactsSorted = contacts.sort((a, b) => a.name.localeCompare(b.name),);
         return(
             <View style={styles.container}>

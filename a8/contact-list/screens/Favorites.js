@@ -2,8 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
 import {fetchContacts} from '../utils/api';
 import ContactThumbnail from '../components/ContactThumbnail';
-import {MaterialIcons} from '@expo/vector-icons';
-import colors from '../utils/colors';
+import store from '../store';
 
 
 const keyExtractor = ({phone}) => phone;
@@ -11,35 +10,32 @@ const keyExtractor = ({phone}) => phone;
 export default class Favorites extends React.Component{
     static navigationOptions = ({navigation: {openDrawer, navigate} }) => ({
         title: 'Favorites',
-        headerLeft: (
-            <MaterialIcons
-                name="menu"
-                size={24}
-                style={{colors: colors.black, marginLeft: 10}}
-                onPress={() => openDrawer()} />
-        ),
     });
 
     state = {
-        contacts: [],
-        loading: true,
-        error: false,
+        contacts: store.getState().contacts,
+        loading: store.getState().isFetchingContacts,
+        error: store.getState().error,
     };
 
     async componentDidMount(){
-        try{
-            const contacts = await fetchContacts();
-            this.setState({
-                contacts,
-                loading: false,
-                error: false,
-            });
-        }catch(e){
-            this.setState({
-                loading: false,
-                error: true,
+        const {contacts} = this.state;
+        this.unsubscribe = store.onChange(() => this.setState({
+            contacts: store.getState().contacts,
+            loading: store.getState().isFetchingContacts,
+            error: store.getState().error,
+        }),
+        );
+        if(contacts.length === 0){
+            const fetchedContacts = await fetchContacts();
+            store.setState({
+                contacts: fetchedContacts,
+                isFetchingContacts: false,
             });
         }
+    }
+    componentWillUnmount(){
+        this.unsubscribe();
     }
     renderFavoriteThumbnail = ({item}) => {
         const {navigation: {navigate}} = this.props;
@@ -51,7 +47,7 @@ export default class Favorites extends React.Component{
         );
     };
     render(){
-        const {loading, contacts, error} = this.state;
+        const {contacts, loading, error} = this.state;
         const favorites = contacts.filter(contact => contact.favorite);
         return(
             <View style={styles.container}>
