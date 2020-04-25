@@ -7,9 +7,16 @@ import { fetchContacts } from '../utils/api';
 const keyExtractor = ({phone}) => phone;
 
 export default class Contacts extends React.Component{
-    static navigationOptions = {
+    static navigationOptions = ({
         title: 'Contacts',
-    };
+        headerLeft: (
+            <MaterialIcons
+                name="menu"
+                size={24}
+                style={{color: colors.black, marginLeft: 10}}
+                onPress={() => openDrawer()} />
+        ),
+    });
 
     state = {
         contacts: [],

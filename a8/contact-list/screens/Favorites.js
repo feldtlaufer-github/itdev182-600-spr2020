@@ -6,9 +6,16 @@ import ContactThumbnail from '../components/ContactThumbnail';
 const keyExtractor = ({phone}) => phone;
 
 export default class Favorites extends React.Component{
-    static navigationOptions = {
+    static navigationOptions = ({
         title: 'Favorites',
-    };
+        headerLeft: (
+            <MaterialIcons
+                name="menu"
+                size={24}
+                style={{colors: colors.black, marginLeft: 10}}
+                onPress={() => openDrawer()} />
+        ),
+    });
 
     state = {
         contacts: [],
